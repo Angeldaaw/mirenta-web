@@ -4,17 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-export default function Sidebar() {
-    const pathName = usePathname();
-
-    const navItems = [
+const navItems = [
         { name: "Dashboard", href: "/dashboard" },
         { name: "Propiedades", href: "/properties" },
     ];
 
+export default function Sidebar() {
+    const pathName = usePathname();
+
     return (
-        <aside className="w-64 bg.white border-r border-gray-200 p-6">
-            <div className="text-xl font-semibold mb-8">MiRenta</div>
+        <aside className="min-h-screen w-64 border-r border-[var(--border)] bg-[var(--sidebar)] p-6 text-[var(--sidebar-foreground)]">
+            <div className="mb-8 text-xl font-semibold text-white">
+                MiRenta
+            </div>
 
             <nav className="space-y-2">
                 {navItems.map((item) => (
@@ -22,11 +24,12 @@ export default function Sidebar() {
                         key={item.href}
                         href={item.href}
                         className={clsx(
-                            "block px-4 py-2 rounded-lg text-sm font-medium transition",
+                            "block rounded-lg px-4 py-2 text-sm font-medium transition",
                             pathName === item.href
-                                ? "bg-primary text-black"
-                                : "text-gray-400 hover:bg-gray-100"
-                        )}>
+                                ? "bg-[var(--sidebar-active)] text-white"
+                                : "text-[var(--sidebar-foreground)] hover:bg-white/10 hover:text-white"
+                        )}
+                        >
                         {item.name}
                     </Link>
                 ))}

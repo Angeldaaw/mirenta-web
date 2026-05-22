@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import Sidebar from "@/components/layout/SideBar";
 import Header from "@/components/layout/Header";
@@ -19,13 +21,16 @@ export default function DashboardLayout({
         );
     }
 
-    if (!token) {
-        return null; // middleware ya redirige
-    }
-
     return (
-    <div className="min-h-screen">
-      {children}
+    <div className="flex min-h-screen bg-[var(--background)]">
+      <Sidebar />
+      <div className="flex min-h-screen flex-1 flex-col">
+        <Header />
+
+        <main className="flex-1 p-6">
+            {children}
+        </main>
+      </div>
     </div>
   );
 }
