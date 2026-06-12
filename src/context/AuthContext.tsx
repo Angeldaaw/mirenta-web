@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useSyncExternalStore, useState } from "react";
 import { loginRequest } from "@/lib/auth";
 import { User } from "@/types/user";
 
@@ -13,20 +13,42 @@ type AuthContextType = {
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
+
+const subscribeToHydration = (callback: () => void) => {
+    callback();
+    return () => {};
+};
+
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
+function readStoredToken() {
+    if (typeof document === "undefined") return null;
+    return getCookie("token");
+}
+
+function readStoredUser() {
+    if (typeof window === "undefined") return null;
+
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) return null;
+
+    try {
+        return JSON.parse(storedUser) as User;
+    } catch {
+        localStorage.removeItem("user");
+        return null;
+    }
+}
+
 export function AuthProvider({children}: {children: React.ReactNode}) {
-    const [token, setToken] = useState<string | null>(null);
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        const storedToken = getCookie("token");
-        const storedUser = localStorage.getItem("user");
-
-        if (storedToken) setToken(storedToken);
-        if (storedUser) setUser(JSON.parse(storedUser) as User);
-
-        setLoading(false);
-    }, []);
+    const hydrated = useSyncExternalStore(
+        subscribeToHydration,
+        getClientSnapshot,
+        getServerSnapshot
+    );
+    const [token, setToken] = useState<string | null>(readStoredToken);
+    const [user, setUser] = useState<User | null>(readStoredUser);
 
     const login = async(email: string, password: string): Promise<void> => {
         const data = await loginRequest(email, password);
@@ -49,7 +71,7 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
     }
 
     return (
-        <AuthContext.Provider value={{user, token, loading, login, logout}}>
+        <AuthContext.Provider value={{user, token, loading: !hydrated, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
