@@ -14,7 +14,7 @@ export default function Header() {
 
     return (
       <header className="flex items-center justify-between border-b px-6 bg-[var(--card)] border-[var(--border)]  px-6 py-4 ">
-        <div className="font-bold text-[var(--foreground)]">Panel de control</div>
+        <div className="font-bold text-[var(--foreground)]"></div>
 
         <div className="flex items-center gap-4">
           {user && (
