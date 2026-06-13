@@ -1,4 +1,5 @@
 import { ApiErrorResponse } from "@/types/api_error";
+import { ApiRequestOptions } from "@/types/api_request_options";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ERROR_API_DEFAULT = "No se pudo completar la solicitud";
@@ -20,8 +21,15 @@ export async function readErrorMessage(response: Response) {
     }
 }
 
-export async function apiRequest<T>(api: string, payload?: RequestInit) {
-    const response = await fetch(`${getApiUrl()}${api}`, payload);
+export async function apiRequest<T>(endpoint: string, options?: ApiRequestOptions) {
+    const {token, headers, ...fetchOptions} = options??{};
+    const response = await fetch(`${getApiUrl()}${endpoint}`, {
+        ...fetchOptions,
+        headers: {
+            ...(token ? {Authorization: `Bearer ${token}`} : {}),
+            ...headers,
+        },
+    }); 
 
     if (!response.ok) {
         throw new Error(await readErrorMessage(response));
