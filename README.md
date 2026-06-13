@@ -86,9 +86,3 @@ Antes de subir cambios, ejecuta:
 npm run lint
 npm run build
 ```
-
-## Notas de seguridad
-
-- No subas `.env.local` ni archivos `.env*` con valores reales.
-- `NEXT_PUBLIC_*` queda expuesto al navegador; no guardes secretos en variables publicas.
-- El token actual se guarda en cookie para que Next pueda proteger rutas desde `src/proxy.ts`.
