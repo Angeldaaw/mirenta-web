@@ -29,6 +29,7 @@ export async function createProperty(
 
 export async function updateProperty(
     token: string,
+    id: string,
     request: UpdatePropertyRequest
 ): Promise<Property> {
     const options = {
@@ -40,5 +41,12 @@ export async function updateProperty(
         body: JSON.stringify(request),
     };
 
-    return apiRequest<Property>(BASE_PROPERTIES_ENDPOINT, options);
+    return apiRequest<Property>(`${BASE_PROPERTIES_ENDPOINT}/${id}`, options);
+}
+
+export async function deleteProperty(token: string, id: string): Promise<void> {
+    return apiRequest<void>(`${BASE_PROPERTIES_ENDPOINT}/${id}`, {
+        method: "DELETE",
+        token
+    });
 }
