@@ -3,14 +3,7 @@
 import { createContext, useContext, useSyncExternalStore, useState } from "react";
 import { loginRequest } from "@/lib/auth";
 import { User } from "@/types/user";
-
-type AuthContextType = {
-    user: User | null;
-    token: string | null;
-    loading: boolean;
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => void;
-};
+import { AuthContextType } from "@/types/auth_context";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 

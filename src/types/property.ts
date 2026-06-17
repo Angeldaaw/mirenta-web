@@ -12,7 +12,6 @@ export type CreatePropertyRequest = {
     name: string;
     address: string;
     monthlyRent: number;
-    status: string;
     ownerId?: string;
 }
 
