@@ -102,28 +102,28 @@ export default function PropertiesPage() {
         <div className="space-y-6">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-semibold text-[var(--foreground)]">
+                    <h1 className="text-2xl font-semibold text-(--foreground)">
                         Propiedades
                     </h1>
-                    <p className="text-sm text-[var(--muted-foreground)]">
+                    <p className="text-sm text-(--muted-foreground)">
                         Administra tus propiedades registradas.
                     </p>
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-3 shadow-sm">
-                        <p className="text-xs font-medium text-[var(--muted-foreground)]">
+                    <div className="rounded-lg border border-(--border) bg-(--card) px-4 py-3 shadow-sm">
+                        <p className="text-xs font-medium text-(--muted-foreground)">
                             Propiedades
                         </p>
-                        <p className="text-xl font-semibold text-[var(--foreground)]">
+                        <p className="text-xl font-semibold text-(--foreground)">
                             {properties.length}
                         </p>
                     </div>
-                    <div className="rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-3 shadow-sm">
-                        <p className="text-xs font-medium text-[var(--muted-foreground)]">
+                    <div className="rounded-lg border border-(--border) bg-(--card) px-4 py-3 shadow-sm">
+                        <p className="text-xs font-medium text-(--muted-foreground)">
                             Renta mensual
                         </p>
-                        <p className="text-xl font-semibold text-[var(--foreground)]">
+                        <p className="text-xl font-semibold text-(--foreground)">
                             {currencyFormatter.format(totalMonthlyRent)}
                         </p>
                     </div>
@@ -143,41 +143,41 @@ export default function PropertiesPage() {
             )}
 
             <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
-                <div className="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--card)] shadow-sm">
-                    <div className="border-b border-[var(--border)] px-5 py-4">
-                        <h2 className="text-base font-semibold text-[var(--foreground)]">
+                <div className="overflow-hidden rounded-lg border border-(--border) bg-(--card) shadow-sm">
+                    <div className="border-b border-(--border) px-5 py-4">
+                        <h2 className="text-base font-semibold text-(--foreground)">
                             Listado
                         </h2>
                     </div>
 
                     {loading ? (
-                        <div className="p-5 text-sm text-[var(--muted-foreground)]">
+                        <div className="p-5 text-sm text-(--muted-foreground)">
                             Cargando propiedades...
                         </div>
                     ) : properties.length === 0 ? (
-                        <div className="p-5 text-sm text-[var(--muted-foreground)]">
+                        <div className="p-5 text-sm text-(--muted-foreground)">
                             Todavia no hay propiedades registradas.
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="w-full min-w-[640px] text-left text-sm">
-                                <thead className="bg-[var(--muted)] text-xs uppercase text-[var(--muted-foreground)]">
+                            <table className="w-full min-w-160 text-left text-sm">
+                                <thead className="bg-(--muted) text-xs uppercase text-(--muted-foreground)">
                                     <tr>
                                         <th className="px-5 py-3 font-semibold">Nombre</th>
                                         <th className="px-5 py-3 font-semibold">Direccion</th>
                                         <th className="px-5 py-3 text-right font-semibold">Renta mensual</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-[var(--border)]">
+                                <tbody className="divide-y divide-(--border)">
                                     {properties.map((property) => (
                                         <tr key={property.id}>
-                                            <td className="px-5 py-4 font-medium text-[var(--foreground)]">
+                                            <td className="px-5 py-4 font-medium text-(--foreground)">
                                                 {property.name}
                                             </td>
-                                            <td className="px-5 py-4 text-[var(--muted-foreground)]">
+                                            <td className="px-5 py-4 text-(--muted-foreground)">
                                                 {property.address}
                                             </td>
-                                            <td className="px-5 py-4 text-right font-medium text-[var(--foreground)]">
+                                            <td className="px-5 py-4 text-right font-medium text-(--foreground)">
                                                 {currencyFormatter.format(property.monthlyRent)}
                                             </td>
                                         </tr>
@@ -190,16 +190,16 @@ export default function PropertiesPage() {
 
                 <form
                     onSubmit={handleSubmit}
-                    className="space-y-4 rounded-lg border border-[var(--border)] bg-[var(--card)] p-5 shadow-sm"
+                    className="space-y-4 rounded-lg border border-(--border) bg-(--card) p-5 shadow-sm"
                 >
                     <div>
-                        <h2 className="text-base font-semibold text-[var(--foreground)]">
+                        <h2 className="text-base font-semibold text-(--foreground)">
                             Nueva propiedad
                         </h2>
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="name" className="block text-sm font-medium text-[var(--foreground)]">
+                        <label htmlFor="name" className="block text-sm font-medium text-(--foreground)">
                             Nombre
                         </label>
                         <input
@@ -210,13 +210,13 @@ export default function PropertiesPage() {
                             onChange={(event) =>
                                 setForm((current) => ({ ...current, name: event.target.value }))
                             }
-                            className="w-full rounded-lg border border-[var(--input)] bg-white px-3 py-2 text-sm outline-none transition focus:border-[var(--primary)] focus:ring-4 focus:ring-blue-100"
+                            className="w-full rounded-lg border border-(--input) bg-white px-3 py-2 text-sm outline-none transition focus:border-(--primary) focus:ring-4 focus:ring-blue-100"
                             required
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="address" className="block text-sm font-medium text-[var(--foreground)]">
+                        <label htmlFor="address" className="block text-sm font-medium text-(--foreground)">
                             Direccion
                         </label>
                         <textarea
@@ -227,13 +227,13 @@ export default function PropertiesPage() {
                             onChange={(event) =>
                                 setForm((current) => ({ ...current, address: event.target.value }))
                             }
-                            className="w-full resize-none rounded-lg border border-[var(--input)] bg-white px-3 py-2 text-sm outline-none transition focus:border-[var(--primary)] focus:ring-4 focus:ring-blue-100"
+                            className="w-full resize-none rounded-lg border border-(--input) bg-white px-3 py-2 text-sm outline-none transition focus:border-(--primary) focus:ring-4 focus:ring-blue-100"
                             required
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="monthlyRent" className="block text-sm font-medium text-[var(--foreground)]">
+                        <label htmlFor="monthlyRent" className="block text-sm font-medium text-(--foreground)">
                             Renta mensual
                         </label>
                         <input
@@ -248,7 +248,7 @@ export default function PropertiesPage() {
                                     monthlyRent: Number(event.target.value),
                                 }))
                             }
-                            className="w-full rounded-lg border border-[var(--input)] bg-white px-3 py-2 text-sm outline-none transition focus:border-[var(--primary)] focus:ring-4 focus:ring-blue-100"
+                            className="w-full rounded-lg border border-(--input) bg-white px-3 py-2 text-sm outline-none transition focus:border-(--primary) focus:ring-4 focus:ring-blue-100"
                             required
                         />
                     </div>
@@ -256,7 +256,7 @@ export default function PropertiesPage() {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="w-full rounded-lg bg-[var(--primary)] px-4 py-2.5 text-sm font-medium text-[var(--primary-foreground)] transition hover:bg-[var(--primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+                        className="w-full rounded-lg bg-(--primary) px-4 py-2.5 text-sm font-medium text-(--primary-foreground) transition hover:bg-(--primary-hover) disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {saving ? "Guardando..." : "Crear propiedad"}
                     </button>
